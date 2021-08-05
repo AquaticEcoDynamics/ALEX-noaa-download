@@ -1,0 +1,25 @@
+# combine first cycle noaa forecasts as obs
+dates <- seq(lubridate::as_date("2020-09-25"), Sys.Date() - lubridate::days(1), by = "1 day")
+
+noaa_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
+#Read list of latitude and longitudes
+neon_sites <- readr::read_csv("noaa_download_site_list.csv")
+
+noaa_model <- "NOAAGEFS_6hr"
+output_directory <- noaa_directory
+model_name <- "observed-met-noaagefs"
+dates_w_errors <- c("2020-12-05","2020-12-06","2020-12-25")
+
+for(i in 1:length(neon_sites$site_id)){
+  
+  print(neon_sites$site_id[i])
+
+  noaaGEFSpoint::stack_noaa_forecasts(forecast_dates = dates,
+                       site = neon_sites$site_id[i],
+                       noaa_directory = noaa_directory,
+                       noaa_model = noaa_model,
+                       output_directory = output_directory,
+                       model_name = model_name,
+                       dates_w_errors = dates_w_errors)
+}
+
