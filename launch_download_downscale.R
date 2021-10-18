@@ -8,8 +8,11 @@
 
 message(paste("Running NOAA scripts starting at:", as.character(Sys.time())))
 
+test_dir <- "/Users/quinn/workfiles/Research/SSC_forecasting/automation_test/"
 
-output_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
+output_directory <- normalizePath(file.path(test_dir, "drivers/noaa"))
+
+#output_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
 configuration_yaml <- "noaa_download_scale_config.yml"
 
 #Read configuration file
