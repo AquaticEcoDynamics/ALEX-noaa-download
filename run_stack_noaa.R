@@ -1,7 +1,12 @@
 # combine first cycle noaa forecasts as obs
-dates <- seq(lubridate::as_date("2020-09-25"), Sys.Date() - lubridate::days(1), by = "1 day")
+dates <- seq(lubridate::as_date("2021-10-15"), Sys.Date() - lubridate::days(1), by = "1 day")
+#dates <- seq(lubridate::as_date("2021-10-15"), lubridate::as_date("2021-10-17"), by = "1 day")
 
-noaa_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
+test_dir <- "/Users/quinn/workfiles/Research/SSC_forecasting/automation_test/"
+
+#noaa_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
+noaa_directory <- normalizePath(file.path(test_dir, "drivers/noaa"))
+
 #Read list of latitude and longitudes
 neon_sites <- readr::read_csv("noaa_download_site_list.csv")
 
