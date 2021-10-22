@@ -8,7 +8,9 @@
 
 message(paste("Running NOAA scripts starting at:", as.character(Sys.time())))
 
-test_dir <- "/Users/quinn/workfiles/Research/SSC_forecasting/automation_test/"
+s3_sync <- TRUE
+
+test_dir <- "/home/rstudio"
 
 output_directory <- normalizePath(file.path(test_dir, "drivers/noaa"))
 
@@ -36,5 +38,8 @@ noaaGEFSpoint::noaa_gefs_download_downscale(site_list = site_list,
                                             run_parallel = config_file$run_parallel,
                                             num_cores = config_file$num_cores,
                                             method = "grid",
-                                            overwrite = FALSE)
-
+                                            overwrite = FALSE,
+                                            grid_name = "flare")
+if(s3_sync){
+  aws.s3::s3sync(path = file.path(test_dir, "drivers"), bucket = "drivers", direction = "upload")
+}
