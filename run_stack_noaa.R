@@ -1,8 +1,8 @@
 # combine first cycle noaa forecasts as obs
-dates <- seq(lubridate::as_date("2021-10-15"), Sys.Date() - lubridate::days(1), by = "1 day")
+dates <- seq(lubridate::as_date("2021-10-19"), Sys.Date() - lubridate::days(1), by = "1 day")
 #dates <- seq(lubridate::as_date("2021-10-15"), lubridate::as_date("2021-10-17"), by = "1 day")
 
-test_dir <- "/Users/quinn/workfiles/Research/SSC_forecasting/automation_test/"
+test_dir <- "/home/rstudio/"
 
 #noaa_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
 noaa_directory <- normalizePath(file.path(test_dir, "drivers/noaa"))
