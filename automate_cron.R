@@ -1,4 +1,4 @@
-remotes::install_github("rqthomas/cronR")
+#remotes::install_github("rqthomas/cronR")
 #remotes::install_deps()
 library(cronR)
 

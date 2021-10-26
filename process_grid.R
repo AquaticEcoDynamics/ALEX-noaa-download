@@ -1,6 +1,3 @@
-
-
-
 test_dir <- "/home/rstudio"
 output_directory <- normalizePath(file.path(test_dir, "drivers"))
 config_file <- yaml::read_yaml("noaa_download_scale_config.yml")
@@ -24,11 +21,11 @@ Rnoaa4cast::noaa_gefs_grid_process_downscale(lat_list = lat_list,
                                              debias_coefficients = NA,
                                              num_cores = 1,
                                              output_directory = output_directory,
+                                             reprocess = FALSE,
                                              write_intermediate_ncdf = TRUE,
-                                             process_specific_date = NA,
+                                             process_specific_date =  NA,
                                              process_specific_cycle = NA,
                                              delete_bad_files = TRUE,
                                              grid_name = "flare",
                                              s3_mode = TRUE,
-                                             bucket = "drivers"
-)
+                                             bucket = "drivers")
