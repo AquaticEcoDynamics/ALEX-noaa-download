@@ -21,7 +21,7 @@ for(i in 1:length(neon_sites$site_id)){
   
   print(neon_sites$site_id[i])
 
-  stack_noaa_forecasts(forecast_dates = dates,
+  Rnoaa4cast::stack_noaa_forecasts(forecast_dates = dates,
                        site = neon_sites$site_id[i],
                        noaa_directory = noaa_directory,
                        noaa_model = noaa_model,
