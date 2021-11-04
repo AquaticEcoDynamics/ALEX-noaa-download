@@ -1,6 +1,7 @@
 #remotes::install_github("rqthomas/cronR")
-#remotes::install_deps()
+#remotes::install_github("FLARE-forecast/Rnoaa4cast")
 library(cronR)
+
 
 home_dir <- "/home/rstudio/neon4cast-noaa-download"
 
