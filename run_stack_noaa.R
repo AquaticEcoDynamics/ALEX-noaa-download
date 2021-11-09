@@ -39,7 +39,7 @@ dates_w_errors <- list(
   c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #LIRO
   c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #PRLA
   c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #PRPO
-  c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #SUGG
+  c("2020-06-22", "2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #SUGG
   c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #TOOL
   c("2020-10-26", "2020-12-05","2020-12-06","2020-12-11", "2020-12-25"), #fcre
   c("2020-10-26", "2020-12-05","2020-12-06", "2020-12-11", "2020-12-25"), #bvre
@@ -62,7 +62,8 @@ for(i in 1:length(neon_sites$site_id)){
                        model_name = model_name,
                        dates_w_errors = lubridate::as_date(dates_w_errors[[i]]),
                        s3_mode = TRUE,
-                       bucket = "drivers")
+                       bucket = "drivers",
+                       verbose = TRUE)
   
   stack_file_name <- file.path(noaa_directory,"noaa", "NOAAGEFS_1hr_stacked_avarage", neon_sites$site_id[i], paste0("observed-met-noaa_",neon_sites$site_id[i], ".nc"))
   
