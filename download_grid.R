@@ -1,7 +1,7 @@
 
 
 
-test_dir <- "/home/rstudio"
+test_dir <- here::here()
 output_directory <- normalizePath(file.path(test_dir, "drivers"))
 config_file <- yaml::read_yaml("noaa_download_scale_config.yml")
 
