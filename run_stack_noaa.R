@@ -1,10 +1,6 @@
-# combine first cycle noaa forecasts as obs
-#dates <- seq(lubridate::as_date("2021--19"), Sys.Date() - lubridate::days(1), by = "1 day")
-#dates <- seq(lubridate::as_date("2021-10-15"), lubridate::as_date("2021-10-17"), by = "1 day")
 library(tidyverse)
-test_dir <- "/home/rstudio/"
+test_dir <- here::here()
 
-#noaa_directory <- normalizePath(file.path(Sys.getenv("MINIO_HOME"), "drivers/noaa"))
 noaa_directory <- normalizePath(file.path(test_dir, "drivers"))
 
 #Read list of latitude and longitudes
@@ -61,7 +57,7 @@ for(i in 1:length(neon_sites$site_id)){
                        output_directory = output_directory,
                        model_name = model_name,
                        dates_w_errors = lubridate::as_date(dates_w_errors[[i]]),
-                       s3_mode = TRUE,
+                       s3_mode = FALSE,
                        bucket = "drivers",
                        verbose = TRUE)
   
@@ -71,22 +67,9 @@ for(i in 1:length(neon_sites$site_id)){
     dir.create(dirname(stack_file_name), recursive = TRUE)
   }
   
-    files <- aws.s3::get_bucket(bucket = "drivers", prefix = file.path("noaa", "NOAAGEFS_1hr_stacked", neon_sites$site_id[i]))
-    keys <- vapply(files, `[[`, "", "Key", USE.NAMES = FALSE)
-    empty <- grepl("/$", keys)
-    keys <- keys[!empty]
-    if(length(keys) > 0){
-      for(k in 1:length(keys)){
-        aws.s3::save_object(object = keys[k],bucket = "drivers", file = file.path(noaa_directory, keys[k]))
-      }
-    }
-  
   Rnoaa4cast::average_stacked_forecasts(forecast_dates = seq(lubridate::as_date(site_start_date[i]), Sys.Date() - lubridate::days(1), by = "1 day"), # cycle through historical dates
                             noaa_stacked_directory = file.path(noaa_directory, "noaa", "NOAAGEFS_1hr_stacked", neon_sites$site_id[i]),
                             output_file = stack_file_name)
   
-  aws.s3::put_object(file = stack_file_name, 
-                     object = file.path("noaa", "NOAAGEFS_1hr_stacked_average", neon_sites$site_id[i], paste0("observed-met-noaa_",neon_sites$site_id[i], ".nc")),
-                     bucket = "drivers")
 }
 
