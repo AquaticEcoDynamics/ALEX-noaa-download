@@ -17,7 +17,7 @@ Rnoaa4cast::noaa_gefs_grid_download(lat_list = lat_list,
                                     forecast_date = NA,
                                     model_name_raw = "noaa/NOAAGEFS_raw",
                                     output_directory = output_directory,
-                                    grid_name = "flare",
-                                    s3_mode = TRUE,
+                                    grid_name = "aed",
+                                    s3_mode = FALSE,
                                     bucket = "drivers")
 
